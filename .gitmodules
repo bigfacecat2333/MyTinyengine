@@ -1,0 +1,3 @@
+[submodule "MyTinyEngine/verndor/spdlog"]
+	path = MyTinyEngine/verndor/spdlog
+	url = https://github.com/gabime/spdlog.git
