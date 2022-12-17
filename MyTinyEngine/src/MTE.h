@@ -1,8 +1,9 @@
 #pragma once
 
 // For use by MTE Application
-#include "MTE/Core/Application.h"
+#include "MTE/Application.h"
+#include "MTE/Log.h"
 
 // ---Entry Point------------------
-#include "MTE/Core/EntryPoint.h"
+#include "MTE/EntryPoint.h"
 // --------------------------------
