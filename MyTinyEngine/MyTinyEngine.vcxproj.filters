@@ -1,31 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Events">
-      <UniqueIdentifier>{3A8963B1-262B-8E87-0FE6-A1DBFB2615D8}</UniqueIdentifier>
+    <Filter Include="MTE">
+      <UniqueIdentifier>{8B05880B-F70E-887C-808A-9E7CEC92937C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MTE\Events">
+      <UniqueIdentifier>{0FA7E41E-FB5E-266C-6466-FFC7503DC15C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MTE\Platform">
+      <UniqueIdentifier>{3FAEC886-2B11-582B-D496-90E1C0D823AE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MTE\Platform\Windows">
+      <UniqueIdentifier>{79274494-65B6-CD5D-0ED5-E158FA42DE03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\MTE\Application.h" />
-    <ClInclude Include="src\MTE\ApplicationEvent.h" />
-    <ClInclude Include="src\MTE\Core.h" />
-    <ClInclude Include="src\MTE\EntryPoint.h" />
+    <ClInclude Include="src\MTE.h" />
+    <ClInclude Include="src\MTE\Application.h">
+      <Filter>MTE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Core.h">
+      <Filter>MTE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\EntryPoint.h">
+      <Filter>MTE</Filter>
+    </ClInclude>
     <ClInclude Include="src\MTE\Events\ApplicationEvent.h">
-      <Filter>Events</Filter>
+      <Filter>MTE\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\MTE\Events\Event.h">
-      <Filter>Events</Filter>
+      <Filter>MTE\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\MTE\Events\KeyEvent.h">
-      <Filter>Events</Filter>
+      <Filter>MTE\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\MTE\Events\MouseEvent.h">
-      <Filter>Events</Filter>
+      <Filter>MTE\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\MTE\Log.h" />
+    <ClInclude Include="src\MTE\Log.h">
+      <Filter>MTE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Platform\Windows\WindowsWindow.h">
+      <Filter>MTE\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Window.h">
+      <Filter>MTE</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mtepch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MTE\Application.cpp" />
-    <ClCompile Include="src\MTE\Log.cpp" />
+    <ClCompile Include="src\MTE\Application.cpp">
+      <Filter>MTE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MTE\Log.cpp">
+      <Filter>MTE</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MTE\Platform\Windows\WindowsWindow.cpp">
+      <Filter>MTE\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\mtepch.cpp" />
   </ItemGroup>
 </Project>

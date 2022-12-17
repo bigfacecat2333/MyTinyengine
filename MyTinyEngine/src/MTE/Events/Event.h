@@ -2,9 +2,6 @@
 
 #include "MTE/Core.h"
 
-#include <string>
-#include <functional>
-
 namespace MTE {
 	// Events are currently blocking, meaning when an event occurs it
 	// immediately gets dispatched and must be dealt with right then an there.

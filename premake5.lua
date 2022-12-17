@@ -11,6 +11,14 @@ workspace "MyTinyEngine"
 
 -- Debug windows x64
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+-- include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "MyTinyEngine/vendor/GLFW/include"
+
+-- include premake file 的位置 copy from glfw premake5.lua
+include "MyTinyEngine/vendor/GLFW"
+
 -- project 表示一个项目，可以包含多个文件
 project "MyTinyEngine"
 	-- location 表示项目的位置 vcxproj所在位置
@@ -22,18 +30,29 @@ project "MyTinyEngine"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "mtepch.h"
+	-- 对于visual studio 还要指定pchsource cpp设置为create， .h设置为use
+	pchsource "MyTinyEngine/src/mtepch.cpp"
+
 	-- files 表示项目中包含的文件
 	files
 	{
-		"%{prj.name}/src/MTE/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.h"
 	}
 
 	-- includedirs 表示项目中包含的头文件
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	-- filter 表示过滤器，可以根据不同的配置进行不同的设置

@@ -1,3 +1,4 @@
+#include "mtepch.h"
 #include "Log.h"
 
 namespace MTE {
