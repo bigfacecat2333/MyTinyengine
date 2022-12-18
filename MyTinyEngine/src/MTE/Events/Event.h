@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MTE/Core.h"
+#include "MTE/Core/Core.h"
 
 namespace MTE {
 	// Events are currently blocking, meaning when an event occurs it
@@ -19,26 +19,26 @@ namespace MTE {
 
 	enum EventCategory
 	{
-		// ½«EventType¹ıÂË
+		// å°†EventTypeè¿‡æ»¤
 		None = 0,
-		EventCategoryApplication =		BIT(0),
-		EventCategoryInput =			BIT(1),
-		EventCategoryKeyboard =			BIT(2),
-		EventCategoryMouse =			BIT(3),
-		EventCategoryMouseButton =		BIT(4)
+		EventCategoryApplication = BIT(0),
+		EventCategoryInput = BIT(1),
+		EventCategoryKeyboard = BIT(2),
+		EventCategoryMouse = BIT(3),
+		EventCategoryMouseButton = BIT(4)
 	};
 
-// ÊµÏÖGetEventType GetName GetCategoryFlags
-// #µÄ¹¦ÄÜÊÇ½«ÆäºóÃæµÄºê²ÎÊı½øĞĞ×Ö·û´®»¯²Ù×÷£¨Stringfication£©
-// ##±»³ÆÎªÁ¬½Ó·û£¨concatenator£©£¬ÓÃÀ´½«Á½¸öTokenÁ¬½ÓÎªÒ»¸öToken¡£
-// #define PRINT( n ) printf( "token" #n " = %d", token##n ) PRINT(mine ) printf( "token" "mine" " = %d", tokenmine );
-// ÀàµÄ¾²Ì¬³ÉÔ±º¯Êı¡¢¾²Ì¬³ÉÔ±±äÁ¿ÊÇºÍÀàÏà¹ØµÄ£¬¶ø²»ÊÇºÍÀàµÄ¾ßÌå¶ÔÏóÏà¹ØµÄ¡£¼´Ê¹Ã»ÓĞ¾ßÌå¶ÔÏó£¬Ò²ÄÜµ÷ÓÃÀàµÄ¾²Ì¬³ÉÔ±º¯ÊıºÍ³ÉÔ±±äÁ¿¡£ -> Õâ¸öÌØĞÔÖ÷ÒªÓÃÓÚÄ£°å±à³Ì
-// Ò»°ãÀàµÄ¾²Ì¬º¯Êı¼¸ºõ¾ÍÊÇÒ»¸öÈ«¾Öº¯Êı£¬Ö»²»¹ıËüµÄ×÷ÓÃÓòÏŞÓÚ°üº¬ËüµÄÎÄ¼şÖĞ
+	// å®ç°GetEventType GetName GetCategoryFlags
+	// #çš„åŠŸèƒ½æ˜¯å°†å…¶åé¢çš„å®å‚æ•°è¿›ï¿½?ï¿½å­—ç¬¦ä¸²åŒ–æ“ä½œï¼ˆStringficationï¿½?
+	// ##ï¿½?ç§°ä¸ºè¿æ¥ç¬¦ï¼ˆconcatenatorï¼‰ï¼Œç”¨æ¥å°†ä¸¤ä¸ªTokenè¿æ¥ä¸ºä¸€ä¸ªTokenï¿½?
+	// #define PRINT( n ) printf( "token" #n " = %d", token##n ) PRINT(mine ) printf( "token" "mine" " = %d", tokenmine );
+	// ç±»çš„é™æ€æˆå‘˜å‡½æ•°ã€é™æ€æˆå‘˜å˜é‡æ˜¯å’Œç±»ç›¸å…³çš„ï¼Œè€Œä¸ï¿½?å’Œç±»çš„å…·ä½“ï¿½?ï¿½è±¡ç›¸å…³çš„ã€‚å³ä½¿æ²¡æœ‰å…·ä½“ï¿½?ï¿½è±¡ï¼Œä¹Ÿèƒ½è°ƒç”¨ç±»çš„é™æ€æˆå‘˜å‡½æ•°å’Œæˆå‘˜å˜é‡ï¿½? -> è¿™ä¸ªç‰¹æ€§ä¸»è¦ç”¨äºæ¨¡æ¿ç¼–ï¿½?
+	// ä¸€ï¿½?ç±»çš„é™æ€å‡½æ•°å‡ ä¹å°±ï¿½?ä¸€ï¿½?å…¨å±€å‡½æ•°ï¼Œåªä¸è¿‡å®ƒçš„ä½œç”¨åŸŸé™äºåŒ…ï¿½?å®ƒçš„æ–‡ä»¶ï¿½?
 #define EVENT_CLASS_TYPE(type)	static EventType GetStaticType() { return EventType::##type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
 
-// ¶ÔÀàµÄÅĞ¶Ï
+// å¯¹ç±»çš„åˆ¤ï¿½?
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
 	class MTE_API Event
@@ -46,42 +46,43 @@ namespace MTE {
 	public:
 		virtual ~Event() = default;
 
-		// Í¨¹ıEVENT_CLASS_TYPEÀ´ÊµÏÖ
+		// é€šè¿‡EVENT_CLASS_TYPEæ¥å®ç°
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
-		
-		// ToString Ö»ÊÇÒ»¸ö·½±ãµ÷ÊÔµÄº¯Êı
+
+		// ToString ï¿½?ï¿½?ä¸€ï¿½?æ–¹ä¾¿è°ƒè¯•çš„å‡½æ•°
 		virtual std::string ToString() const { return GetName(); }
-		
-		// ÅĞ¶ÏÊÇ·ñÊÇÄ³¸öÀàĞÍ
+
+		// åˆ¤æ–­ï¿½?å¦æ˜¯æŸä¸ªç±»å‹
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		// ²é¿´ÊÇ·ñ±»´¦ÀíÁË
+
+		// æŸ¥çœ‹æ˜¯å¦å¤„ç†
 		bool m_Handled = false;
 	};
 
 	class EventDispatcher
 	{
 	public:
-		// renference±£Ö¤ÈÎºÎEvent½øÈë
+		// renferenceä¿è¯ä»»ä½•Eventè¿›å…¥
 		EventDispatcher(Event& event)
 			: m_Event(event)
 		{
 		}
 
 		// F will be deduced by the compiler
-		// Ä£°åÊµÏÖcallback
+		// æ¨¡æ¿å®ç°callback
+		// Tæ˜¯m_Eventçš„ç±»å‹ï¼ŒFæ˜¯callbackçš„ç±»å‹
 		template<typename T, typename F>
 		bool Dispatch(const F& func)
 		{
-			// ÒòÎªÊÇstaticº¯Êı£¬ËùÒÔ¿ÉÒÔÓÃT::GetStaticType()
+			// å› ä¸ºæ˜¯staticå‡½æ•°ï¼Œæ‰€ä»¥å¯ä»¥ç”¨T::GetStaticType()
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.Handled = func(static_cast<T&>(m_Event));
+				m_Event.m_Handled = func(static_cast<T&>(m_Event));
 				return true;
 			}
 			return false;

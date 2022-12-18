@@ -4,6 +4,9 @@
     <Filter Include="MTE">
       <UniqueIdentifier>{8B05880B-F70E-887C-808A-9E7CEC92937C}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MTE\Core">
+      <UniqueIdentifier>{C3580972-AF25-647D-D83E-5225C46A990B}</UniqueIdentifier>
+    </Filter>
     <Filter Include="MTE\Events">
       <UniqueIdentifier>{0FA7E41E-FB5E-266C-6466-FFC7503DC15C}</UniqueIdentifier>
     </Filter>
@@ -16,14 +19,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\MTE.h" />
-    <ClInclude Include="src\MTE\Application.h">
-      <Filter>MTE</Filter>
+    <ClInclude Include="src\MTE\Core\Application.h">
+      <Filter>MTE\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MTE\Core.h">
-      <Filter>MTE</Filter>
+    <ClInclude Include="src\MTE\Core\Core.h">
+      <Filter>MTE\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\MTE\EntryPoint.h">
-      <Filter>MTE</Filter>
+    <ClInclude Include="src\MTE\Core\EntryPoint.h">
+      <Filter>MTE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Core\Layer.h">
+      <Filter>MTE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Core\LayerStack.h">
+      <Filter>MTE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Core\Log.h">
+      <Filter>MTE\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MTE\Core\Window.h">
+      <Filter>MTE\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\MTE\Events\ApplicationEvent.h">
       <Filter>MTE\Events</Filter>
@@ -37,23 +52,23 @@
     <ClInclude Include="src\MTE\Events\MouseEvent.h">
       <Filter>MTE\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\MTE\Log.h">
-      <Filter>MTE</Filter>
-    </ClInclude>
     <ClInclude Include="src\MTE\Platform\Windows\WindowsWindow.h">
       <Filter>MTE\Platform\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="src\MTE\Window.h">
-      <Filter>MTE</Filter>
     </ClInclude>
     <ClInclude Include="src\mtepch.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\MTE\Application.cpp">
-      <Filter>MTE</Filter>
+    <ClCompile Include="src\MTE\Core\Application.cpp">
+      <Filter>MTE\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\MTE\Log.cpp">
-      <Filter>MTE</Filter>
+    <ClCompile Include="src\MTE\Core\Layer.cpp">
+      <Filter>MTE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MTE\Core\LayerStack.cpp">
+      <Filter>MTE\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MTE\Core\Log.cpp">
+      <Filter>MTE\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\MTE\Platform\Windows\WindowsWindow.cpp">
       <Filter>MTE\Platform\Windows</Filter>

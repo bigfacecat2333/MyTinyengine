@@ -7,3 +7,6 @@
 [submodule "MyTinyEngine/vendor/GLFW"]
 	path = MyTinyEngine/vendor/GLFW
 	url = https://github.com/TheCherno/glfw.git
+[submodule "MyTinyEngine/vendor/imgui"]
+	path = MyTinyEngine/vendor/imgui
+	url = https://github.com/TheCherno/imgui.git

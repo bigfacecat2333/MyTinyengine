@@ -21,7 +21,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "MTE/Log.h"
+#include "MTE/Core/Log.h"
 
 #ifdef MTE_PLATFORM_WINDOWS
 #include <Windows.h>

@@ -1,4 +1,4 @@
--- workspace ±íÊ¾Ò»¸ö¹¤×÷Çø£¬¿ÉÒÔ°üº¬¶à¸öÏîÄ¿
+-- workspace è¡¨ç¤ºä¸€ä¸ªå·¥ä½œåŒºï¼Œå¯ä»¥åŒ…å«å¤šä¸ªé¡¹ç›®
 workspace "MyTinyEngine"
 	architecture "x64"
 	
@@ -15,78 +15,91 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "MyTinyEngine/vendor/GLFW/include"
-
--- include premake file µÄÎ»ÖÃ copy from glfw premake5.lua
+IncludeDir["Glad"] = "MyTinyEngine/vendor/Glad/include"
+IncludeDir["ImGui"] = "MyTinyEngine/vendor/imgui"
+-- include premake file çš„ä½ç½® copy from glfw premake5.lua
 include "MyTinyEngine/vendor/GLFW"
+include "MyTinyEngine/vendor/Glad"
+include "MyTinyEngine/vendor/imgui"
 
--- project ±íÊ¾Ò»¸öÏîÄ¿£¬¿ÉÒÔ°üº¬¶à¸öÎÄ¼ş
+-- project è¡¨ç¤ºä¸€ä¸ªé¡¹ç›®ï¼Œå¯ä»¥åŒ…å«å¤šä¸ªæ–‡ä»¶
 project "MyTinyEngine"
-	-- location ±íÊ¾ÏîÄ¿µÄÎ»ÖÃ vcxprojËùÔÚÎ»ÖÃ
+	-- location è¡¨ç¤ºé¡¹ç›®çš„ä½ç½® vcxprojæ‰€åœ¨ä½ç½®
 	location "MyTinyEngine"
 	-- dll
 	kind "SharedLib"
 	language "C++"
-	-- ..±íÊ¾×Ö·û´®Æ´½Ó
+	-- ..è¡¨ç¤ºå­—ç¬¦ä¸²æ‹¼æ¥
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "mtepch.h"
-	-- ¶ÔÓÚvisual studio »¹ÒªÖ¸¶¨pchsource cppÉèÖÃÎªcreate£¬ .hÉèÖÃÎªuse
+	-- å¯¹äºvisual studio è¿˜è¦æŒ‡å®špchsource cppè®¾ç½®ä¸ºcreateï¼Œ .hè®¾ç½®ä¸ºuse
 	pchsource "MyTinyEngine/src/mtepch.cpp"
 
-	-- files ±íÊ¾ÏîÄ¿ÖĞ°üº¬µÄÎÄ¼ş
+	-- files è¡¨ç¤ºé¡¹ç›®ä¸­åŒ…å«çš„æ–‡ä»¶
 	files
 	{
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/src/**.h"
 	}
 
-	-- includedirs ±íÊ¾ÏîÄ¿ÖĞ°üº¬µÄÍ·ÎÄ¼ş
+	-- includedirs è¡¨ç¤ºé¡¹ç›®ä¸­åŒ…å«çš„å¤´æ–‡ä»¶
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
-	-- filter ±íÊ¾¹ıÂËÆ÷£¬¿ÉÒÔ¸ù¾İ²»Í¬µÄÅäÖÃ½øĞĞ²»Í¬µÄÉèÖÃ
+	-- filter è¡¨ç¤ºè¿‡æ»¤å™¨ï¼Œå¯ä»¥æ ¹æ®ä¸åŒçš„é…ç½®è¿›è¡Œä¸åŒçš„è®¾ç½®
 	filter "system:windows"
 		cppdialect "C++17"
 		-- 	Sets <RuntimeLibrary> to "MultiThreaded"
 		staticruntime "On"
 		systemversion "latest"
 
-		-- ¶¨Òåºê
+		-- å®šä¹‰å®
 		defines
 		{
 			"MTE_PLATFORM_WINDOWS",
-			"MTE_BUILD_DLL"
+			"MTE_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
-		-- postbuildcommands ±íÊ¾ÔÚ±àÒëºóÖ´ĞĞµÄÃüÁî
+		-- postbuildcommands è¡¨ç¤ºåœ¨ç¼–è¯‘åæ‰§è¡Œçš„å‘½ä»¤
 		postbuildcommands
 		{
-			-- ½«±àÒëºóµÄdll ¸´ÖÆµ½SandboxÖĞ
+			-- å°†ç¼–è¯‘åçš„dll å¤åˆ¶åˆ°Sandboxä¸­
 			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 	filter "configurations:Debug"
 		defines "MT_DEBUG"
-		-- symbols ±íÊ¾ÊÇ·ñÉú³Éµ÷ÊÔĞÅÏ¢
+		-- buildoptions è¡¨ç¤ºç¼–è¯‘é€‰é¡¹ /MDd è¡¨ç¤ºä½¿ç”¨å¤šçº¿ç¨‹è°ƒè¯•åº“ multithreaded dll debug
+		buildoptions "/MDd"
+		-- symbols è¡¨ç¤ºæ˜¯å¦ç”Ÿæˆè°ƒè¯•ä¿¡æ¯
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "MT_RELEASE"
-		-- optimize ±íÊ¾ÊÇ·ñÓÅ»¯
+		-- '/MD' è¡¨ç¤ºä½¿ç”¨å¤šçº¿ç¨‹åº“ multithreaded dll '
+		buildoptions "/MD"
+		-- optimize è¡¨ç¤ºæ˜¯å¦ä¼˜åŒ–
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "MT_DIST"
+		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -109,7 +122,7 @@ project "Sandbox"
 		"MyTinyEngine/src"
 	}
 
-	-- link a list of library and project names. ÀàËÆÓëCMAKEÖĞµÄtarget_link_libraries
+	-- link a list of library and project names. ç±»ä¼¼ä¸CMAKEä¸­çš„target_link_libraries
 	links
 	{
 		"MyTinyEngine"
@@ -127,12 +140,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "MT_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "MT_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "MT_DIST"
+		buildoptions "/MD"
 		optimize "On"
